@@ -19,55 +19,38 @@ public class ZigZagConversion {
 		}
 	}
 	public static String convert(String s, int numRows) {
-//		Map<Integer, String> zigZag = new HashMap<>();
-//		String convert = "";
-//		Boolean reverse = false;
-//		int rowCount = 0;
-//		if(numRows == 1) {
-//			return s;
-//		}
-//		for(int i = 0 ; i < s.length() ; i++ ) {
-//			String ch = String.valueOf(s.charAt(i));
-//			if(reverse) {
-//				--rowCount;
-//				createZigZagString(zigZag, rowCount, ch);
-//				if(rowCount == 1) {
-//					reverse = false;
-//				}
-//				
-//			}else {
-//				++rowCount;
-//				createZigZagString(zigZag, rowCount, ch);
-//				if(rowCount == numRows ) {
-//					reverse = true;
-//				}
-//				
-//			}
-//		}
-//		
-//		for(int j = 1; j <= numRows ; j++) {
-//			if(zigZag.get(j)!= null)
-//			convert += zigZag.get(j);
-//		}
-//		return convert;
-        if (numRows == 1) return s;
+		Map<Integer, String> zigZag = new HashMap<>();
+		String convert = "";
+		Boolean reverse = false;
+		int rowCount = 0;
+		if(numRows == 1) {
+			return s;
+		}
+		for(int i = 0 ; i < s.length() ; i++ ) {
+			String ch = String.valueOf(s.charAt(i));
+			if(reverse) {
+				--rowCount;
+				createZigZagString(zigZag, rowCount, ch);
+				if(rowCount == 1) {
+					reverse = false;
+				}
+				
+			}else {
+				++rowCount;
+				createZigZagString(zigZag, rowCount, ch);
+				if(rowCount == numRows ) {
+					reverse = true;
+				}
+				
+			}
+		}
+		
+		for(int j = 1; j <= numRows ; j++) {
+			if(zigZag.get(j)!= null)
+			convert += zigZag.get(j);
+		}
+		return convert;
 
-        List<StringBuilder> rows = new ArrayList<>();
-        for (int i = 0; i < Math.min(numRows, s.length()); i++)
-            rows.add(new StringBuilder());
-
-        int curRow = 0;
-        boolean goingDown = false;
-
-        for (char c : s.toCharArray()) {
-            rows.get(curRow).append(c);
-            if (curRow == 0 || curRow == numRows - 1) goingDown = !goingDown;
-            curRow += goingDown ? 1 : -1;
-        }
-
-        StringBuilder ret = new StringBuilder();
-        for (StringBuilder row : rows) ret.append(row);
-        return ret.toString();
         
     }
 
